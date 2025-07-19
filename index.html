@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свободный театр - Расписание</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #fef7ee 0%, #f5f3ff 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ed7516, #8b5cf6);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1f2937;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 24px;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .nav-tab.active {
+            background: white;
+            color: #ed7516;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab:not(.active) {
+            color: #6b7280;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .schedule-filters {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .filter-btn {
+            padding: 12px 16px;
+            border: none;
+            border-radius: 12px;
+            background: white;
+            color: #374151;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .filter-btn.active {
+            background: #ed7516;
+            color: white;
+        }
+
+        .rehearsal-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f3f4f6;
+        }
+
+        .rehearsal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .rehearsal-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #1f2937;
+        }
+
+        .rehearsal-type {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .type-general {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .type-technical {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .rehearsal-details {
+            display: grid;
+            gap: 8px;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .icon {
+            width: 16px;
+            height: 16px;
+            opacity: 0.6;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #9ca3af;
+        }
+
+        .empty-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .nav-item.active {
+            color: #ed7516;
+            background: #fef7ee;
+        }
+
+        .nav-item:not(.active) {
+            color: #6b7280;
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .nav-label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .main-content {
+            padding-bottom: 80px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <div class="header">
+                <div class="logo">🎭</div>
+                <h1>Свободный театр</h1>
+                <p class="subtitle">Расписание репетиций</p>
+            </div>
+
+            <!-- Расписание -->
+            <div id="schedule-content" class="content active">
+                <div class="schedule-filters">
+                    <button class="filter-btn active" onclick="setFilter('today')">Сегодня</button>
+                    <button class="filter-btn" onclick="setFilter('tomorrow')">Завтра</button>
+                    <button class="filter-btn" onclick="setFilter('week')">На неделю</button>
+                    <button class="filter-btn" onclick="setFilter('month')">Весь месяц</button>
+                </div>
+
+                <div id="rehearsals-list">
+                    <div class="rehearsal-card">
+                        <div class="rehearsal-header">
+                            <div class="rehearsal-title">Гамлет</div>
+                            <span class="rehearsal-type type-general">Генеральная</span>
+                        </div>
+                        <div class="rehearsal-details">
+                            <div class="detail-item">
+                                <span class="icon">📅</span>
+                                <span>Понедельник, 15 января</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">🕐</span>
+                                <span>19:00 (120 мин)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">📍</span>
+                                <span>Большая сцена</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">👤</span>
+                                <span>Режиссер: Иван Петров</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rehearsal-card">
+                        <div class="rehearsal-header">
+                            <div class="rehearsal-title">Ромео и Джульетта</div>
+                            <span class="rehearsal-type type-technical">Техническая</span>
+                        </div>
+                        <div class="rehearsal-details">
+                            <div class="detail-item">
+                                <span class="icon">📅</span>
+                                <span>Вторник, 16 января</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">🕐</span>
+                                <span>18:30 (90 мин)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">📍</span>
+                                <span>Малая сцена</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">👤</span>
+                                <span>Режиссер: Мария Сидорова</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Мессенджер -->
+            <div id="messenger-content" class="content">
+                <div class="empty-state">
+                    <div class="empty-icon">💬</div>
+                    <h3>Мессенджер</h3>
+                    <p>Группы для общения по спектаклям</p>
+                </div>
+            </div>
+
+            <!-- Админ -->
+            <div id="admin-content" class="content">
+                <div class="empty-state">
+                    <div class="empty-icon">⚙️</div>
+                    <h3>Панель администратора</h3>
+                    <p>Управление расписанием и пользователями</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Нижняя навигация -->
+        <div class="bottom-nav">
+            <div class="nav-item active" onclick="showTab('schedule')">
+                <div class="nav-icon">📅</div>
+                <div class="nav-label">Расписание</div>
+            </div>
+            <div class="nav-item" onclick="showTab('messenger')">
+                <div class="nav-icon">💬</div>
+                <div class="nav-label">Мессенджер</div>
+            </div>
+            <div class="nav-item" onclick="showTab('admin')">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">Админ</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключение между вкладками
+        function showTab(tabName) {
+            // Скрываем все контенты
+            document.querySelectorAll('.content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Убираем активный класс у всех навигационных элементов
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Показываем нужный контент
+            document.getElementById(tabName + '-content').classList.add('active');
+            
+            // Добавляем активный класс к нужному навигационному элементу
+            event.currentTarget.classList.add('active');
+        }
+
+        // Фильтрация расписания
+        function setFilter(filter) {
+            // Убираем активный класс у всех кнопок
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Добавляем активный класс к нажатой кнопке
+            event.target.classList.add('active');
+            
+            // Здесь можно добавить логику фильтрации
+            console.log('Фильтр:', filter);
+        }
+
+        // Инициализация Telegram WebApp (если доступно)
+        if (window.Telegram && window.Telegram.WebApp) {
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+            
+            // Настройка темы
+            const theme = window.Telegram.WebApp.colorScheme;
+            if (theme === 'dark') {
+                document.body.style.background = '#1f2937';
+                document.body.style.color = '#f9fafb';
+            }
+        }
+    </script>
+</body>
+</html> 
