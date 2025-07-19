@@ -12,137 +12,138 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #fef7ee 0%, #f5f3ff 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             min-height: 100vh;
-            color: #333;
+            color: #334155;
+            line-height: 1.6;
         }
 
         .container {
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px 20px;
+            min-height: 100vh;
+            position: relative;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 32px;
+            padding-top: 8px;
         }
 
         .logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ed7516, #8b5cf6);
-            border-radius: 20px;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #f59e0b, #8b5cf6);
+            border-radius: 18px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 600;
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3);
         }
 
         h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
-            color: #1f2937;
+            color: #1e293b;
+            letter-spacing: -0.025em;
         }
 
         .subtitle {
-            color: #6b7280;
-            font-size: 14px;
-        }
-
-        .nav-tabs {
-            display: flex;
-            background: #f3f4f6;
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 24px;
-        }
-
-        .nav-tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .nav-tab.active {
-            background: white;
-            color: #ed7516;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .nav-tab:not(.active) {
-            color: #6b7280;
+            color: #64748b;
+            font-size: 16px;
+            font-weight: 400;
         }
 
         .content {
             display: none;
+            animation: fadeIn 0.3s ease-out;
         }
 
         .content.active {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .schedule-filters {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         .filter-btn {
-            padding: 12px 16px;
+            padding: 14px 16px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             background: white;
-            color: #374151;
+            color: #475569;
             font-weight: 500;
+            font-size: 15px;
             cursor: pointer;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .filter-btn.active {
-            background: #ed7516;
+            background: linear-gradient(135deg, #f59e0b, #f97316);
             color: white;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+            border-color: transparent;
         }
 
         .rehearsal-card {
             background: white;
-            border-radius: 16px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 24px;
             margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border: 1px solid #f3f4f6;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f1f5f9;
+            transition: all 0.2s ease;
+        }
+
+        .rehearsal-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
         }
 
         .rehearsal-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .rehearsal-title {
             font-weight: 600;
-            font-size: 16px;
-            color: #1f2937;
+            font-size: 18px;
+            color: #1e293b;
+            line-height: 1.3;
         }
 
         .rehearsal-type {
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
             font-size: 12px;
-            font-weight: 500;
+            font-weight: 600;
+            letter-spacing: 0.025em;
         }
 
         .type-general {
@@ -155,40 +156,68 @@
             color: #92400e;
         }
 
+        .type-dress {
+            background: #f3e8ff;
+            color: #7c3aed;
+        }
+
+        .type-preview {
+            background: #dcfce7;
+            color: #166534;
+        }
+
         .rehearsal-details {
             display: grid;
-            gap: 8px;
-            font-size: 14px;
-            color: #6b7280;
+            gap: 12px;
+            font-size: 15px;
+            color: #64748b;
         }
 
         .detail-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            padding: 8px 0;
         }
 
         .icon {
-            width: 16px;
-            height: 16px;
-            opacity: 0.6;
+            width: 18px;
+            height: 18px;
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
-            color: #9ca3af;
+            padding: 60px 20px;
+            color: #94a3b8;
         }
 
         .empty-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 16px;
-            background: #f3f4f6;
-            border-radius: 12px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         .bottom-nav {
@@ -196,50 +225,136 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: white;
-            border-top: 1px solid #e5e7eb;
-            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid #e2e8f0;
+            padding: 16px 20px 24px;
             display: flex;
             justify-content: space-around;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.08);
         }
 
         .nav-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: all 0.2s;
+            padding: 12px 16px;
+            border-radius: 16px;
+            transition: all 0.2s ease;
+            min-width: 80px;
         }
 
         .nav-item.active {
-            color: #ed7516;
-            background: #fef7ee;
+            color: #f59e0b;
+            background: rgba(245, 158, 11, 0.1);
         }
 
         .nav-item:not(.active) {
-            color: #6b7280;
+            color: #64748b;
+        }
+
+        .nav-item:hover:not(.active) {
+            background: rgba(100, 116, 139, 0.05);
+            color: #475569;
         }
 
         .nav-icon {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
         }
 
         .nav-label {
             font-size: 12px;
             font-weight: 500;
+            letter-spacing: 0.025em;
         }
 
         .main-content {
-            padding-bottom: 80px;
+            padding-bottom: 100px;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-active {
+            background: #10b981;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+        }
+
+        .status-inactive {
+            background: #6b7280;
+            box-shadow: 0 0 0 2px rgba(107, 114, 128, 0.2);
         }
 
         @media (max-width: 480px) {
             .container {
-                padding: 16px;
+                padding: 20px 16px;
+            }
+            
+            .header {
+                margin-bottom: 28px;
+            }
+            
+            .logo {
+                width: 64px;
+                height: 64px;
+                font-size: 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+        }
+
+        /* Темная тема для Telegram */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+                color: #e2e8f0;
+            }
+            
+            .rehearsal-card {
+                background: #1e293b;
+                border-color: #334155;
+                box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            }
+            
+            .filter-btn {
+                background: #1e293b;
+                color: #cbd5e1;
+                border-color: #334155;
+            }
+            
+            .filter-btn:hover {
+                background: #334155;
+            }
+            
+            .bottom-nav {
+                background: rgba(30, 41, 59, 0.95);
+                border-color: #334155;
+            }
+            
+            .empty-state {
+                color: #64748b;
+            }
+            
+            .empty-icon {
+                background: linear-gradient(135deg, #334155, #475569);
             }
         }
     </style>
@@ -285,6 +400,10 @@
                                 <span class="icon">👤</span>
                                 <span>Режиссер: Иван Петров</span>
                             </div>
+                            <div class="detail-item">
+                                <span class="status-indicator status-active"></span>
+                                <span>Активная репетиция</span>
+                            </div>
                         </div>
                     </div>
 
@@ -310,6 +429,39 @@
                                 <span class="icon">👤</span>
                                 <span>Режиссер: Мария Сидорова</span>
                             </div>
+                            <div class="detail-item">
+                                <span class="status-indicator status-active"></span>
+                                <span>Подтверждена</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rehearsal-card">
+                        <div class="rehearsal-header">
+                            <div class="rehearsal-title">Вишневый сад</div>
+                            <span class="rehearsal-type type-dress">Прогон</span>
+                        </div>
+                        <div class="rehearsal-details">
+                            <div class="detail-item">
+                                <span class="icon">📅</span>
+                                <span>Среда, 17 января</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">🕐</span>
+                                <span>20:00 (150 мин)</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">📍</span>
+                                <span>Основная сцена</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="icon">👤</span>
+                                <span>Режиссер: Анна Козлова</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="status-indicator status-inactive"></span>
+                                <span>В ожидании</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -320,7 +472,7 @@
                 <div class="empty-state">
                     <div class="empty-icon">💬</div>
                     <h3>Мессенджер</h3>
-                    <p>Группы для общения по спектаклям</p>
+                    <p>Группы для общения по спектаклям<br>Будет доступно в следующем обновлении</p>
                 </div>
             </div>
 
@@ -329,7 +481,7 @@
                 <div class="empty-state">
                     <div class="empty-icon">⚙️</div>
                     <h3>Панель администратора</h3>
-                    <p>Управление расписанием и пользователями</p>
+                    <p>Управление расписанием и пользователями<br>Доступно только администраторам</p>
                 </div>
             </div>
         </div>
@@ -393,10 +545,24 @@
             // Настройка темы
             const theme = window.Telegram.WebApp.colorScheme;
             if (theme === 'dark') {
-                document.body.style.background = '#1f2937';
-                document.body.style.color = '#f9fafb';
+                document.body.style.background = '#0f172a';
+                document.body.style.color = '#e2e8f0';
             }
         }
+
+        // Добавляем плавные анимации при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.rehearsal-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.4s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
     </script>
 </body>
 </html> 
